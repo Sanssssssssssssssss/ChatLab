@@ -94,3 +94,10 @@
 
 - 分支规则：功能需求开发前必须新建或切换到功能分支；允许提交到main的例外情况：发版工作流、独立内部文档仓库 `.docs/` 的日常维护
 - Commit 规范：使用 Conventional Commits。scope 规则——通用改动 scope 随意（如 `ai`、`import`、`sidebar` 等模块名）；仅当改动是**平台特有**时才使用平台 scope（`electron`、`cli`、`web`）。
+
+
+## Code Review Rules
+
+- 只报告能由现实用户路径触发并造成正确性、数据安全、权限、兼容性或重要交互回归的问题；评论必须给出从输入到结果的完整因果链。
+- 修改数据库、配置、AI 数据或 `userDataDir` 时，必须核对已发布版本升级路径、失败中断和数据目录兼容门禁；安全路径是复用统一迁移与兼容 helper。
+- Electron、CLI Web 与 Web WASM 的共享行为不得在入口层产生不一致实现；安全路径是复用 `packages/node-runtime`、`packages/core` 或现有 adapter/service。
